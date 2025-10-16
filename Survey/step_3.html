@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step 3 • You're in good company</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink:#e75480;          /* primary */
+      --pink-2:#ff8fb0;        /* gradient stop */
+      --pink-light:#ffe6ec;    /* light bg */
+      --pink-shadow:rgba(231,84,128,.25);
+      --border:#EDEDF2;
+      --hover:#F8F8F8;
+      --text:#212124;
+      --muted:#6D6E71;
+    }
+
+    /* Base */
+    html { line-height: 1.15; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif; background-color: #ffffff; color: var(--text); }
+    *,:after,:before { box-sizing: border-box; border: 0 solid var(--border); }
+    html,body { height: 100%; }
+
+    /* App shell */
+    #__next { display: flex; flex-direction: column; margin: 0 auto; max-width: 430px; width: 100%; min-height: 100%; background-color: #ffffff; position: relative; }
+
+    /* Bigger top loading region */
+    .loading-wrap { position: sticky; top: 0; left: 0; right:0; padding: 20px 16px 6px; background: #fff; z-index: 50; }
+    .progress-label { text-align: center; font-size: 14px; color: #8b8e93; font-style: italic; margin: 2px 0 8px; }
+    .progress-shell { width: 100%; height: 26px; border-radius: 9999px; background: linear-gradient(180deg, #fff, var(--pink-light)); box-shadow: inset 0 1px 0 rgba(0,0,0,.04), 0 6px 14px rgba(231,84,128,.08); overflow: hidden; }
+    .loading-bar { height: 100%; width: 0%; border-radius: inherit; background: linear-gradient(90deg, var(--pink), var(--pink-2)); box-shadow: 0 1px 2px rgba(231,84,128,.35), inset 0 0 0 1px rgba(231,84,128,.35); animation: load 5s linear forwards; }
+    @keyframes load { from { width: 0%; } to { width: 100%; } }
+    @media (prefers-reduced-motion: reduce) { .loading-bar { animation-duration: 1ms; } }
+
+    /* Content */
+    .main { flex: 1 1 auto; display: flex; justify-content: center; align-items: center; padding: 36px 20px; }
+    .card { max-width: 430px; text-align: left; }
+    .eyebrow { font-weight: 700; font-size: 14px; letter-spacing: .02em; color: var(--pink); margin-bottom: 10px; }
+    .title { font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 14px; }
+    .lead { font-size: 16px; color: var(--text); line-height: 1.55; margin-bottom: 14px; }
+    .muted { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+    .hl { background: linear-gradient(180deg, rgba(231,84,128,.12), rgba(231,84,128,.12)); border-radius: 6px; padding: 0 4px; }
+
+    /* Social proof bits */
+    .proof { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0 8px; }
+    .pill { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; background:#fff; }
+    .stars { font-size: 14px; letter-spacing: 1px; }
+    .avatars { display:flex; }
+    .avatar { width:24px; height:24px; border-radius:999px; background: var(--pink-light); border:1px solid var(--pink); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--pink); margin-left:-6px; }
+    .avatar:first-child { margin-left:0; }
+
+    /* Action row */
+    .actions { display:flex; justify-content:center; gap:12px; margin-top:18px; }
+    .btn { border:1px solid var(--border); background:#fff; color:var(--text); padding:12px 14px; border-radius:12px; font-weight:700; }
+    .btn.primary { background: var(--pink); color:#fff; border-color: var(--pink); }
+
+    /* Footer note */
+    .footer { padding: 14px; border-top: 1px solid var(--border); text-align: center; font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+
+<body>
+  <div id="__next">
+    <!-- Bigger top loading bar area -->
+    <div class="loading-wrap" aria-live="polite">
+      <div class="progress-label">Preparing results…</div>
+      <div class="progress-shell">
+        <div class="loading-bar" id="progress"></div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <main class="main">
+      <div class="card">
+        <div class="eyebrow">🌿 Don’t worry, you’re in good company!</div>
+        <h1 class="title">Millions of women around the world experience these symptoms due to <span id="stage-text" class="hl">hormonal changes</span>.</h1>
+        <p class="lead">Luckily, <strong>Chinese Herbal Medicine</strong> has been balancing hormones and correcting these issues for thousands of years. <strong>Now it’s your turn.</strong></p>
+
+        <div class="proof">
+          <div class="pill" aria-label="Community trust">
+            <div class="avatars" aria-hidden="true">
+              <div class="avatar">A</div>
+              <div class="avatar">B</div>
+              <div class="avatar">C</div>
+              <div class="avatar">D</div>
+            </div>
+            <span class="muted">Real women, real relief</span>
+          </div>
+          <div class="pill" aria-label="Satisfaction rating">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <span class="muted">Trusted by our community</span>
+          </div>
+        </div>
+
+        <p class="muted">Next, we’ll look at a few patterns in your sleep and cycle to pinpoint what imbalances are driving your symptoms.</p>
+
+        <div class="actions">
+          <button id="skipBtn" class="btn" type="button" aria-label="Skip waiting">Skip</button>
+          <button id="continueBtn" class="btn primary" type="button" aria-label="Continue now">Continue now</button>
+        </div>
+      </div>
+    </main>
+
+    <div class="footer">Auto-advancing shortly…</div>
+  </div>
+
+  <script>
+    (function(){
+      // Session helpers
+      const QUIZ_KEY = 'menopause-quiz';
+      const SID_KEY = 'quiz_session_id';
+      function getAnswers(){ try { return JSON.parse(localStorage.getItem(QUIZ_KEY)) || {}; } catch { return {}; } }
+      function getSessionId(){ let id = localStorage.getItem(SID_KEY); if(!id){ id = (crypto.randomUUID ? crypto.randomUUID() : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16))); localStorage.setItem(SID_KEY, id);} return id; }
+
+      // Read stage from URL or localStorage
+      const params = new URLSearchParams(window.location.search);
+      const stageParam = params.get('stage');
+      const ls = getAnswers();
+      const rawStage = stageParam || ls.stage || '';
+
+      function stagePhrase(s){
+        if(!s) return 'hormonal changes';
+        s = String(s).toLowerCase();
+        if (s.includes('peri')) return 'perimenopause';
+        if (s.includes('post')) return 'postmenopause';
+        if (s.includes('pre')) return 'pre‑menopause';
+        if (s.includes('menopause')) return 'menopause';
+        return 'hormonal changes';
+      }
+
+      document.getElementById('stage-text').textContent = stagePhrase(rawStage);
+
+      // Ensure sid present in query for downstream steps
+      const sid = getSessionId();
+      if (!params.get('sid')) params.set('sid', sid);
+
+      // Auto-advance after 5s
+      const NEXT_PAGE = 'step_4.html';
+      const goNext = () => { window.location.href = NEXT_PAGE + '?' + params.toString(); };
+      const timer = setTimeout(goNext, 5000);
+
+      // Buttons
+      document.getElementById('skipBtn').addEventListener('click', () => { clearTimeout(timer); goNext(); });
+      document.getElementById('continueBtn').addEventListener('click', () => { clearTimeout(timer); goNext(); });
+
+      // Optional: log a view event (uncomment if using your save-click function)
+      // navigator.sendBeacon && navigator.sendBeacon('/.netlify/functions/save-click', new Blob([JSON.stringify({ sessionId: sid, step: 3, event: 'view_social_proof', page: location.pathname + location.search, ts: new Date().toISOString() })], {type:'application/json'}));
+    })();
+  </script>
+</body>
+</html>
