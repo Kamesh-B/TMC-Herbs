@@ -60,7 +60,7 @@
       <div class="header-container">
         <img class="logo" src="https://static.wixstatic.com/media/c70145_6f9d2c9d30da4051a7678b3d1ee8e175~mv2.png/v1/fill/w_176,h_182,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c70145_948fe39b8daf48799a907c089cac9b9a~.png" alt="App logo" />
       </div>
-      <hr class="separator" />
+        <hr class="separator" />
     </section>
 
     <!-- Main -->
@@ -125,5 +125,53 @@
       </footer>
     </section>
   </div>
+
+  <script>
+    (function(){
+      const QUIZ_KEY = 'menopause-quiz';
+      const QUIZ_SESSION_KEY = 'quiz_session_id';
+
+      function getAnswers(){
+        try { return JSON.parse(localStorage.getItem(QUIZ_KEY)) || {}; }
+        catch { return {}; }
+      }
+      function setAnswers(obj){ localStorage.setItem(QUIZ_KEY, JSON.stringify(obj)); }
+      function setAnswer(key, value){ const d = getAnswers(); d[key] = value; setAnswers(d); }
+
+      function getSessionId(){
+        let id = localStorage.getItem(QUIZ_SESSION_KEY);
+        if (!id) {
+          id = (crypto.randomUUID ? crypto.randomUUID() : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+          ));
+          localStorage.setItem(QUIZ_SESSION_KEY, id);
+        }
+        return id;
+      }
+
+      function onChooseStage(e){
+        // Gracefully handle no JS: only prevent default when we can store
+        e.preventDefault();
+        const el = e.currentTarget;
+        const stage = (el.getAttribute('aria-label') || el.querySelector('.option-title')?.textContent || '').trim();
+        const sid = getSessionId();
+        setAnswer('sessionId', sid);
+        setAnswer('stage', stage);
+
+        // forward along as query params too (optional)
+        const params = new URLSearchParams(window.location.search);
+        params.set('stage', stage);
+        params.set('sid', sid);
+        window.location.href = 'step_1.html?' + params.toString();
+      }
+
+      document.querySelectorAll('.option-button').forEach(a => {
+        a.addEventListener('click', onChooseStage);
+        a.addEventListener('keydown', (ev)=>{
+          if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); a.click(); }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
