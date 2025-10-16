@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step 1 • Symptoms</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/cxss2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- Base Setup & Resets --- */
+    html { line-height: 1.15; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif; background-color: #fdfdfd; }
+    *,:after,:before { box-sizing: border-box; border: 0 solid #e5e7eb; }
+    html,body { height: 100%; }
+    div, span, p, h1, h2, h3, ul, li, footer, section, button, a, img { margin: 0; padding: 0; border: 0; font: inherit; vertical-align: baseline; }
+    ul { list-style: none; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; }
+
+    /* --- Layout --- */
+    #__next { display: flex; flex-direction: column; margin: 0 auto; max-width: 430px; width: 100%; height: 100%; background-color: #ffffff; position: relative; }
+    .main-content-section { flex: 1 1 auto; display: flex; justify-content: center; align-items: center; padding: 32px 20px 24px; }
+    .content-wrapper { width: 100%; max-width: 430px; }
+
+    /* --- Header --- */
+    .header-section { position: sticky; top: 0; z-index: 10; background-color: #FFFFFF; padding-top: 12px; }
+    .header-container { display: flex; align-items: center; justify-content: center; padding: 12px 20px; }
+    .logo { width: 80px; }
+    .separator { border: none; border-top: 1px solid #EDEDF2; margin: 0; }
+
+    /* --- Title & Helper Text --- */
+    .title-container { display: flex; justify-content: center; margin-bottom: 8px; padding: 0 4px; }
+    .title-text { color: #212124; font-size: 22px; font-weight: 700; line-height: 1.25; text-align: center; }
+    .subtitle { color: #5F6166; font-size: 14px; text-align: center; margin-bottom: 16px; }
+
+    /* --- Multi-select option chips --- */
+    .options-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .option { border: 1px solid #EDEDF2; border-radius: 14px; padding: 12px; text-align: center; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; transition: background .2s, border-color .2s, box-shadow .2s, color .2s; user-select: none; }
+    .option:hover { background: #F8F8F8; border-color: #DADBE3; }
+    .option[aria-pressed="true"] { background: #F2F6FF; border-color: #8AA7FF; box-shadow: inset 0 0 0 2px rgba(138,167,255,.35); color: #0F1F52; }
+
+    /* --- Footer / Nav --- */
+    .nav { display: flex; gap: 10px; margin-top: 18px; }
+    .btn { flex: 1; border-radius: 14px; padding: 14px 16px; font-weight: 700; font-size: 16px; text-align: center; border: 1px solid #EDEDF2; background: #fff; }
+    .btn:hover { background: #F8F8F8; }
+    .btn.primary { background: #0F1F52; color: #fff; border-color: #0F1F52; }
+    .btn.primary[disabled] { opacity: .45; cursor: not-allowed; }
+
+    /* --- Footer links --- */
+    .footer-section { padding: 0; display: flex; justify-content: center; }
+    .footer-container { width: 100%; padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 8px; align-items: center; border-top: 1px solid #EDEDF2; background-color: #ffffff; }
+    .footer-links { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 6px; }
+    .footer-link { font-size: 12px; font-weight: 400; color: #6D6E71; text-decoration: none; }
+    .footer-separator { margin: 0 5px; color: #d3d3d3; }
+  </style>
+</head>
+
+<body>
+  <div id="__next">
+    <!-- Header -->
+    <section class="header-section" aria-label="Header">
+      <div class="header-container">
+        <img class="logo" src="https://static.wixstatic.com/media/c70145_6f9d2c9d30da4051a7678b3d1ee8e175~mv2.png/v1/fill/w_176,h_182,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c70145_948fe39b8daf48799a907c089cac9b9a~.png" alt="App logo" />
+      </div>
+      <hr class="separator" />
+    </section>
+
+    <!-- Main -->
+    <section class="main-content-section" aria-labelledby="symptom-title">
+      <div class="content-wrapper">
+        <div class="title-container">
+          <h1 id="symptom-title" class="title-text">3. Which symptoms bother you the most right now? (Select all that apply)</h1>
+        </div>
+        <p class="subtitle">This helps us understand how to best help you.</p>
+
+        <div class="options-list" id="options" role="group" aria-label="Symptoms">
+          <button class="option" type="button" data-value="Night sweats" aria-pressed="false">Night sweats</button>
+          <button class="option" type="button" data-value="Hot flashes" aria-pressed="false">Hot flashes</button>
+          <button class="option" type="button" data-value="Mood swings / Moodyness" aria-pressed="false">Mood swings / Moodyness</button>
+          <button class="option" type="button" data-value="Low energy" aria-pressed="false">Low energy</button>
+          <button class="option" type="button" data-value="Low sex drive" aria-pressed="false">Low sex drive</button>
+          <button class="option" type="button" data-value="Forgetfulness" aria-pressed="false">Forgetfulness</button>
+          <button class="option" type="button" data-value="Weight gain" aria-pressed="false">Weight gain</button>
+          <button class="option" type="button" data-value="Brain Fog / can’t focus" aria-pressed="false">Brain Fog / can’t focus</button>
+          <button class="option" type="button" data-value="Hair loss" aria-pressed="false">Hair loss</button>
+          <button class="option" type="button" data-value="Migraines / Headaches" aria-pressed="false">Migraines / Headaches</button>
+          <button class="option" type="button" data-value="Poor sleep" aria-pressed="false">Poor sleep</button>
+          <button class="option" type="button" data-value="Anxiety" aria-pressed="false">Anxiety</button>
+          <button class="option" type="button" data-value="Agitation / irritability" aria-pressed="false">Agitation / irritability</button>
+          <button class="option" type="button" data-value="Osteoporosis" aria-pressed="false">Osteoporosis</button>
+          <button class="option" type="button" data-value="Body odor" aria-pressed="false">Body odor</button>
+          <button class="option" type="button" data-value="Aches and Pains" aria-pressed="false">Aches and Pains</button>
+          <button class="option" type="button" data-value="Muscle loss" aria-pressed="false">Muscle loss</button>
+          <button class="option" type="button" data-value="Vaginal Dryness" aria-pressed="false">Vaginal Dryness</button>
+        </div>
+
+        <div class="nav" role="navigation">
+          <a href="step_0.html" class="btn" aria-label="Back to previous step">Back</a>
+          <button id="nextBtn" class="btn primary" disabled aria-disabled="true" aria-label="Continue to next step">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer-section">
+      <footer class="footer-container" aria-label="Footer">
+        <div class="footer-links">
+          <a class="footer-link" href="#">Terms</a>
+          <span class="footer-separator">•</span>
+          <a class="footer-link" href="#">Privacy</a>
+          <span class="footer-separator">•</span>
+          <a class="footer-link" href="#">Support</a>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+  <script>
+    (function(){
+      const list = document.getElementById('options');
+      const nextBtn = document.getElementById('nextBtn');
+
+      function updateButtonState(){
+        const selected = [...list.querySelectorAll('.option[aria-pressed="true"]')];
+        const hasAny = selected.length > 0;
+        nextBtn.disabled = !hasAny;
+        nextBtn.setAttribute('aria-disabled', String(!hasAny));
+      }
+
+      list.addEventListener('click', (e) => {
+        const btn = e.target.closest('.option');
+        if(!btn) return;
+        const pressed = btn.getAttribute('aria-pressed') === 'true';
+        btn.setAttribute('aria-pressed', String(!pressed));
+        updateButtonState();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const selected = [...list.querySelectorAll('.option[aria-pressed="true"]')].map(b => b.dataset.value);
+        const params = new URLSearchParams();
+        // Append each value separately: symptoms=...
+        selected.forEach(val => params.append('symptoms', val));
+        // Navigate to next step (assumes this file is inside the same folder as step_2.html)
+        window.location.href = `step_2.html?${params.toString()}`;
+      });
+
+      // Keyboard improvements
+      list.querySelectorAll('.option').forEach(btn => {
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

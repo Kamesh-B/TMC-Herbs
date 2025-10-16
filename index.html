@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flo: Fertility, Cycle, and Ovulation. Female Health App.</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Base Setup & Resets --- */
+        html {
+            line-height: 1.15;
+            -webkit-text-size-adjust: 100%;
+        }
+        body {
+            margin: 0;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #fdfdfd;
+        }
+        *,:after,:before {
+            box-sizing: border-box;
+            border: 0 solid #e5e7eb;
+        }
+        html,body {
+            height: 100%;
+        }
+        div, span, p, h1, h2, h3, ul, li, footer, section, button, a, img {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        ul {
+            list-style: none;
+        }
+        button, a {
+            background: none;
+            cursor: pointer;
+            text-decoration: none; /* This is the key change to make links look like buttons */
+        }
+
+        /* --- Main Layout --- */
+        #__next {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            max-width: 430px;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            position: relative;
+        }
+        .main-content-section {
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 48px 24px;
+        }
+        .content-wrapper {
+            width: 100%;
+            max-width: 430px;
+        }
+        
+        /* --- Header --- */
+        .header-section {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: #FFFFFF;
+            padding-top: 16px;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 24px;
+        }
+        .logo {
+            width: 80px;
+        }
+        .separator {
+            border: none;
+            border-top: 1px solid #EDEDF2;
+            margin: 0;
+        }
+        
+        /* --- Title --- */
+        .title-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .title-text {
+            color: #212124;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.1;
+            text-align: center;
+            font-family: 'Manrope', sans-serif;
+        }
+        
+        /* --- Age Group Buttons --- */
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .age-button {
+            background-color: #FFFFFF;
+            border: 1px solid #EDEDF2;
+            border-radius: 16px;
+            padding: 8px;
+            transition: background 0.2s, border 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .age-button:hover {
+            background-color: #F8F8F8;
+            border-color: #DADBE3;
+        }
+        .age-button-image {
+            max-width: 100%;
+            padding: 12px;
+            height: auto;
+        }
+        .age-button-text-wrapper {
+            background-color: #F7F8FA;
+            width: 100%;
+            padding: 12px 0;
+            border-radius: 10px;
+            margin-top: 8px;
+        }
+        .age-button-text {
+            color: #000;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: -0.025em;
+        }
+        
+        /* --- "Under 18" Button --- */
+        .under-18-button {
+            display: block; /* Important for anchor tag layout */
+            grid-column: 1 / -1;
+            border: 1px solid #EDEDF2;
+            border-radius: 16px;
+            padding: 18px;
+            transition: background 0.2s;
+            margin-top: 16px;
+        }
+        .under-18-button:hover {
+            background-color: #F8F8F8;
+        }
+        .under-18-text {
+            color: #212124;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        /* --- Footer --- */
+        .footer-section {
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .footer-container {
+            width: 100%;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            align-items: center;
+            border-top: 1px solid #EDEDF2;
+            background-color: #ffffff;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .footer-link {
+            font-size: 12px;
+            font-weight: 400;
+            color: #6D6E71;
+            text-decoration: none;
+        }
+        .footer-separator {
+            margin: 0 5px;
+            color: #d3d3d3;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="__next">
+        <section class="header-section">
+            <div class="header-container">
+                <img class="logo" src="https://static.wixstatic.com/media/c70145_6f9d2c9d30da4051a7678b3d1ee8e175~mv2.png/v1/fill/w_176,h_182,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c70145_948fe39b8daf48799a907c089cac9b9a~.png" alt="Flo - Female Health App">
+            </div>
+            <hr class="separator">
+        </section>
+
+        <section class="main-content-section">
+            <div class="content-wrapper">
+                <div class="title-container">
+                    <span class="title-text">What’s your age group?</span>
+                </div>
+                <div class="button-grid">
+                    <a href="Survey/step_0.html" class="age-button">
+                        <img class="age-button-image" src="https://content.owhealth.com/release_v2/media/en-US/4nkXQwwvJ28HbwWByvSyRy.svg" alt="">
+                        <div class="age-button-text-wrapper">
+                             <span class="age-button-text">18-25</span>
+                        </div>
+                    </a>
+                    <a href="Survey/step_0.html" class="age-button">
+                        <img class="age-button-image" src="https://content.owhealth.com/release_v2/media/en-US/2HjmA3XBn6LgoAafbmbxE.svg" alt="">
+                         <div class="age-button-text-wrapper">
+                            <span class="age-button-text">26-35</span>
+                        </div>
+                    </a>
+                    <a href="Survey/step_0.html" class="age-button">
+                        <img class="age-button-image" src="https://content.owhealth.com/release_v2/media/en-US/3t1EJYZRzcf9XbcxXP7MDi.svg" alt="">
+                        <div class="age-button-text-wrapper">
+                            <span class="age-button-text">36-44</span>
+                        </div>
+                    </a>
+                    <a href="Survey/step_0.html" class="age-button">
+                        <img class="age-button-image" src="https://content.owhealth.com/release_v2/media/en-US/1NjKez7ow2hjDCfDic5XJ5.svg" alt="">
+                        <div class="age-button-text-wrapper">
+                            <span class="age-button-text">45+</span>
+                        </div>
+                    </a>
+                </div>
+                <a href="Survey/step_0.html" class="under-18-button">
+                    <p class="under-18-text">Under 18</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="footer-section">
+            <footer class="footer-container">
