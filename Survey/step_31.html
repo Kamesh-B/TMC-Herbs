@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Step 11 • Protein Frequency</title>
+  <title>Step 31 • Prescription Birth Control</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,28 +12,40 @@
   <style>
     :root{ --pink:#e75480; --pink-light:#ffe6ec; --pink-shadow:rgba(231,84,128,.25); --border:#EDEDF2; --hover:#F8F8F8; --text:#212124; --muted:#6D6E71; }
     html{line-height:1.15;-webkit-text-size-adjust:100%}
-    body{margin:0;font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;background-color:#fff;color:var(--text)}
+    body{margin:0;font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text)}
     *,:after,:before{box-sizing:border-box;border:0 solid var(--border)}
     html,body{height:100%}
+    a{color:inherit;text-decoration:none}
+
     #__next{display:flex;flex-direction:column;margin:0 auto;max-width:430px;width:100%;min-height:100%;background:#fff;position:relative}
     .main-content-section{flex:1 1 auto;display:flex;justify-content:center;align-items:center;padding:32px 20px 24px}
     .content-wrapper{width:100%;max-width:430px}
+
+    /* Header */
     .header-section{position:sticky;top:0;z-index:10;background:#fff;padding-top:12px}
     .header-container{display:flex;align-items:center;justify-content:center;padding:12px 20px}
     .logo{width:80px}
     .separator{border:none;border-top:1px solid var(--border);margin:0}
+
+    /* Title */
     .title-container{display:flex;justify-content:center;margin-bottom:8px;padding:0 4px}
     .title-text{color:var(--text);font-size:22px;font-weight:700;line-height:1.25;text-align:center}
     .subtitle{color:#5F6166;font-size:14px;text-align:center;margin-bottom:16px}
+
+    /* Options */
     .options-list{display:grid;grid-template-columns:1fr;gap:10px}
     .option{border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center;font-weight:700;font-size:16px;letter-spacing:-.01em;transition:background .2s,border-color .2s,box-shadow .2s,color .2s;user-select:none;background:#fff;color:var(--text)}
     .option:hover{background:var(--hover);border-color:#DADBE3}
     .option[aria-pressed="true"]{background:var(--pink-light);border-color:var(--pink);box-shadow:inset 0 0 0 2px var(--pink-shadow);color:#7a1b46}
+
+    /* Nav */
     .nav{display:flex;gap:10px;margin-top:18px}
     .btn{flex:1;border-radius:14px;padding:14px 16px;font-weight:700;font-size:16px;text-align:center;border:1px solid var(--border);background:#fff;color:var(--text);transition:background .2s}
     .btn:hover{background:var(--hover)}
     .btn.primary{background:var(--pink);color:#fff;border-color:var(--pink)}
     .btn.primary[disabled]{opacity:.45;cursor:not-allowed}
+
+    /* Footer */
     .footer-section{padding:0;display:flex;justify-content:center}
     .footer-container{width:100%;padding:16px;display:flex;flex-direction:column;justify-content:center;gap:8px;align-items:center;border-top:1px solid var(--border);background:#fff}
     .footer-links{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px}
@@ -43,6 +55,7 @@
 </head>
 <body>
   <div id="__next">
+    <!-- Header -->
     <section class="header-section" aria-label="Header">
       <div class="header-container">
         <img class="logo" src="https://static.wixstatic.com/media/c70145_6f9d2c9d30da4051a7678b3d1ee8e175~mv2.png/v1/fill/w_176,h_182,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c70145_948fe39b8daf48799a907c089cac9b9a~.png" alt="App logo" />
@@ -50,18 +63,19 @@
       <hr class="separator" />
     </section>
 
-    <section class="main-content-section" aria-labelledby="protein-title">
+    <!-- Main -->
+    <section class="main-content-section" aria-labelledby="bc-title">
       <div class="content-wrapper">
         <div class="title-container">
-          <h1 id="protein-title" class="title-text">11. Do you eat protein at every meal?</h1>
+          <h1 id="bc-title" class="title-text">Are you taking some form of prescription birth control?</h1>
         </div>
         <p class="subtitle">Choose the best match for you.</p>
 
-        <div class="options-list" id="options" role="radiogroup" aria-label="Protein frequency">
-          <button class="option" type="button" data-value="protein_yes" aria-pressed="false" role="radio" aria-checked="false">Yes, I make sure to have protein every time I eat</button>
-          <button class="option" type="button" data-value="protein_most" aria-pressed="false" role="radio" aria-checked="false">Most meals, I try to, but sometimes miss it</button>
-          <button class="option" type="button" data-value="protein_rare" aria-pressed="false" role="radio" aria-checked="false">Not really, I don’t think about it much</button>
-          <button class="option" type="button" data-value="protein_no" aria-pressed="false" role="radio" aria-checked="false">No, I mostly eat carbs or light foods</button>
+        <div class="options-list" id="options" role="radiogroup" aria-label="Prescription birth control status">
+          <button class="option" type="button" data-value="bc_current" aria-pressed="false" role="radio" aria-checked="false">Yes, currently</button>
+          <button class="option" type="button" data-value="bc_past" aria-pressed="false" role="radio" aria-checked="false">I used to, but not anymore</button>
+          <button class="option" type="button" data-value="bc_no" aria-pressed="false" role="radio" aria-checked="false">No</button>
+          <button class="option" type="button" data-value="bc_unsure" aria-pressed="false" role="radio" aria-checked="false">Not sure</button>
         </div>
 
         <div class="nav" role="navigation">
@@ -71,6 +85,7 @@
       </div>
     </section>
 
+    <!-- Footer -->
     <section class="footer-section">
       <footer class="footer-container" aria-label="Footer">
         <div class="footer-links">
@@ -86,19 +101,65 @@
 
   <script>
     (function(){
-      const QUIZ_KEY='menopause-quiz';
-      function getAnswers(){ try{return JSON.parse(localStorage.getItem(QUIZ_KEY))||{};}catch{return{};} }
-      function setAnswers(o){ localStorage.setItem(QUIZ_KEY, JSON.stringify(o)); }
-      function setAnswer(k,v){ const d=getAnswers(); d[k]=v; setAnswers(d); }
+      const KEY='menopause-quiz';
+      const SID_KEY='quiz_session_id';
+
+      // Helpers
+      function get(){ try{return JSON.parse(localStorage.getItem(KEY))||{};}catch{return{};} }
+      function setAll(o){ localStorage.setItem(KEY, JSON.stringify(o)); }
+      function setAns(k,v){ const d=get(); d[k]=v; setAll(d); }
+      function params(){ return new URLSearchParams(location.search); }
+
+      // Ensure session id in query
+      const qs=params();
+      let sid=localStorage.getItem(SID_KEY);
+      if(!sid){
+        sid=(crypto.randomUUID?crypto.randomUUID():([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)));
+        localStorage.setItem(SID_KEY,sid);
+      }
+      if(!qs.get('sid')) qs.set('sid', sid);
+
+      // UI wiring
       const list=document.getElementById('options');
       const nextBtn=document.getElementById('nextBtn');
       const backBtn=document.getElementById('backBtn');
-      function updateState(){ const sel=list.querySelector('.option[aria-pressed="true"]'); const on=!!sel; nextBtn.disabled=!on; nextBtn.setAttribute('aria-disabled', String(!on)); }
-      list.addEventListener('click',e=>{ const btn=e.target.closest('.option'); if(!btn) return; list.querySelectorAll('.option').forEach(b=>{b.setAttribute('aria-pressed','false');b.setAttribute('aria-checked','false');}); btn.setAttribute('aria-pressed','true'); btn.setAttribute('aria-checked','true'); updateState(); });
-      function getParams(){ return new URLSearchParams(location.search); }
-      backBtn.addEventListener('click',e=>{ e.preventDefault(); const qs=getParams().toString(); location.href=`step_10.html${qs?('?' + qs):''}`; });
-      nextBtn.addEventListener('click',()=>{ const sel=list.querySelector('.option[aria-pressed="true"]'); if(!sel) return; const val=sel.dataset.value; setAnswer('protein_frequency', val); const params=getParams(); params.set('protein_frequency', val); const NEXT_PAGE='step_12.html'; location.href=`${NEXT_PAGE}?${params.toString()}`; });
-      list.querySelectorAll('.option').forEach(btn=>{ btn.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); btn.click(); } }); });
+
+      function update(){
+        const sel=list.querySelector('.option[aria-pressed="true"]');
+        const on=!!sel;
+        nextBtn.disabled=!on;
+        nextBtn.setAttribute('aria-disabled', String(!on));
+      }
+
+      list.addEventListener('click', e=>{
+        const btn=e.target.closest('.option'); if(!btn) return;
+        list.querySelectorAll('.option').forEach(b=>{b.setAttribute('aria-pressed','false'); b.setAttribute('aria-checked','false');});
+        btn.setAttribute('aria-pressed','true'); btn.setAttribute('aria-checked','true');
+        update();
+      });
+
+      // Keyboard support
+      list.querySelectorAll('.option').forEach(b=>{
+        b.addEventListener('keydown', e=>{
+          if(e.key==='Enter'||e.key===' '){ e.preventDefault(); b.click(); }
+        });
+      });
+
+      // Nav
+      backBtn.addEventListener('click', e=>{
+        e.preventDefault();
+        const prev='step_30.html';
+        location.href = `${prev}?${qs.toString()}`;
+      });
+
+      nextBtn.addEventListener('click', ()=>{
+        const sel=list.querySelector('.option[aria-pressed="true"]'); if(!sel) return;
+        const val=sel.dataset.value;
+        setAns('birth_control_status', val);
+        qs.set('birth_control_status', val);
+        const next='step_32.html';
+        location.href = `${next}?${qs.toString()}`;
+      });
     })();
   </script>
 </body>

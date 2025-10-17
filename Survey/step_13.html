@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Step 11 • Protein Frequency</title>
-
+  <title>Step 13 • Alcohol Consumption</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
     :root{ --pink:#e75480; --pink-light:#ffe6ec; --pink-shadow:rgba(231,84,128,.25); --border:#EDEDF2; --hover:#F8F8F8; --text:#212124; --muted:#6D6E71; }
     html{line-height:1.15;-webkit-text-size-adjust:100%}
@@ -50,18 +48,18 @@
       <hr class="separator" />
     </section>
 
-    <section class="main-content-section" aria-labelledby="protein-title">
+    <section class="main-content-section" aria-labelledby="alco-title">
       <div class="content-wrapper">
         <div class="title-container">
-          <h1 id="protein-title" class="title-text">11. Do you eat protein at every meal?</h1>
+          <h1 id="alco-title" class="title-text">13. What’s your alcohol consumption like?</h1>
         </div>
         <p class="subtitle">Choose the best match for you.</p>
 
-        <div class="options-list" id="options" role="radiogroup" aria-label="Protein frequency">
-          <button class="option" type="button" data-value="protein_yes" aria-pressed="false" role="radio" aria-checked="false">Yes, I make sure to have protein every time I eat</button>
-          <button class="option" type="button" data-value="protein_most" aria-pressed="false" role="radio" aria-checked="false">Most meals, I try to, but sometimes miss it</button>
-          <button class="option" type="button" data-value="protein_rare" aria-pressed="false" role="radio" aria-checked="false">Not really, I don’t think about it much</button>
-          <button class="option" type="button" data-value="protein_no" aria-pressed="false" role="radio" aria-checked="false">No, I mostly eat carbs or light foods</button>
+        <div class="options-list" id="options" role="radiogroup" aria-label="Alcohol intake">
+          <button class="option" type="button" data-value="alcohol_social" aria-pressed="false" role="radio" aria-checked="false">I drink socially (1–2 times a week)</button>
+          <button class="option" type="button" data-value="alcohol_nightly" aria-pressed="false" role="radio" aria-checked="false">I have a glass most nights</button>
+          <button class="option" type="button" data-value="alcohol_cut_back" aria-pressed="false" role="radio" aria-checked="false">I used to drink more but cut back</button>
+          <button class="option" type="button" data-value="alcohol_none" aria-pressed="false" role="radio" aria-checked="false">I don’t drink at all</button>
         </div>
 
         <div class="nav" role="navigation">
@@ -86,19 +84,19 @@
 
   <script>
     (function(){
-      const QUIZ_KEY='menopause-quiz';
-      function getAnswers(){ try{return JSON.parse(localStorage.getItem(QUIZ_KEY))||{};}catch{return{};} }
-      function setAnswers(o){ localStorage.setItem(QUIZ_KEY, JSON.stringify(o)); }
-      function setAnswer(k,v){ const d=getAnswers(); d[k]=v; setAnswers(d); }
+      const KEY='menopause-quiz';
+      function get(){ try{return JSON.parse(localStorage.getItem(KEY))||{};}catch{return{};} }
+      function setAll(o){ localStorage.setItem(KEY, JSON.stringify(o)); }
+      function setAns(k,v){ const d=get(); d[k]=v; setAll(d); }
       const list=document.getElementById('options');
       const nextBtn=document.getElementById('nextBtn');
       const backBtn=document.getElementById('backBtn');
-      function updateState(){ const sel=list.querySelector('.option[aria-pressed="true"]'); const on=!!sel; nextBtn.disabled=!on; nextBtn.setAttribute('aria-disabled', String(!on)); }
-      list.addEventListener('click',e=>{ const btn=e.target.closest('.option'); if(!btn) return; list.querySelectorAll('.option').forEach(b=>{b.setAttribute('aria-pressed','false');b.setAttribute('aria-checked','false');}); btn.setAttribute('aria-pressed','true'); btn.setAttribute('aria-checked','true'); updateState(); });
-      function getParams(){ return new URLSearchParams(location.search); }
-      backBtn.addEventListener('click',e=>{ e.preventDefault(); const qs=getParams().toString(); location.href=`step_10.html${qs?('?' + qs):''}`; });
-      nextBtn.addEventListener('click',()=>{ const sel=list.querySelector('.option[aria-pressed="true"]'); if(!sel) return; const val=sel.dataset.value; setAnswer('protein_frequency', val); const params=getParams(); params.set('protein_frequency', val); const NEXT_PAGE='step_12.html'; location.href=`${NEXT_PAGE}?${params.toString()}`; });
-      list.querySelectorAll('.option').forEach(btn=>{ btn.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); btn.click(); } }); });
+      function update(){ const sel=list.querySelector('.option[aria-pressed="true"]'); const on=!!sel; nextBtn.disabled=!on; nextBtn.setAttribute('aria-disabled', String(!on)); }
+      list.addEventListener('click',e=>{const btn=e.target.closest('.option'); if(!btn) return; list.querySelectorAll('.option').forEach(b=>{b.setAttribute('aria-pressed','false');b.setAttribute('aria-checked','false');}); btn.setAttribute('aria-pressed','true'); btn.setAttribute('aria-checked','true'); update();});
+      function params(){ return new URLSearchParams(location.search); }
+      backBtn.addEventListener('click',e=>{e.preventDefault(); const qs=params().toString(); location.href=`step_12.html${qs?('?' + qs):''}`;});
+      nextBtn.addEventListener('click',()=>{const sel=list.querySelector('.option[aria-pressed="true"]'); if(!sel) return; const val=sel.dataset.value; setAns('alcohol_consumption', val); const p=params(); p.set('alcohol_consumption', val); location.href=`step_14.html?${p.toString()}`;});
+      list.querySelectorAll('.option').forEach(b=>b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault(); b.click();}}));
     })();
   </script>
 </body>

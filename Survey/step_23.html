@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Step 23 • Energy Since It Began</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{ --pink:#e75480; --pink-light:#ffe6ec; --pink-shadow:rgba(231,84,128,.25); --border:#EDEDF2; --hover:#F8F8F8; --text:#212124; --muted:#6D6E71; }
+    html{line-height:1.15;-webkit-text-size-adjust:100%}
+    body{margin:0;font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text)}
+    *,:after,:before{box-sizing:border-box;border:0 solid var(--border)}
+    html,body{height:100%}
+    a{color:inherit;text-decoration:none}
+
+    #__next{display:flex;flex-direction:column;margin:0 auto;max-width:430px;width:100%;min-height:100%;background:#fff;position:relative}
+    .main-content-section{flex:1 1 auto;display:flex;justify-content:center;align-items:center;padding:32px 20px 24px}
+    .content-wrapper{width:100%;max-width:430px}
+
+    /* Header */
+    .header-section{position:sticky;top:0;z-index:10;background:#fff;padding-top:12px}
+    .header-container{display:flex;align-items:center;justify-content:center;padding:12px 20px}
+    .logo{width:80px}
+    .separator{border:none;border-top:1px solid var(--border);margin:0}
+
+    /* Title */
+    .title-container{display:flex;justify-content:center;margin-bottom:8px;padding:0 4px}
+    .title-text{color:var(--text);font-size:22px;font-weight:700;line-height:1.25;text-align:center}
+    .subtitle{color:#5F6166;font-size:14px;text-align:center;margin-bottom:16px}
+
+    /* Options */
+    .options-list{display:grid;grid-template-columns:1fr;gap:10px}
+    .option{border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center;font-weight:700;font-size:16px;letter-spacing:-.01em;transition:background .2s,border-color .2s,box-shadow .2s,color .2s;user-select:none;background:#fff;color:var(--text)}
+    .option:hover{background:var(--hover);border-color:#DADBE3}
+    .option[aria-pressed="true"]{background:var(--pink-light);border-color:var(--pink);box-shadow:inset 0 0 0 2px var(--pink-shadow);color:#7a1b46}
+
+    /* Nav */
+    .nav{display:flex;gap:10px;margin-top:18px}
+    .btn{flex:1;border-radius:14px;padding:14px 16px;font-weight:700;font-size:16px;text-align:center;border:1px solid var(--border);background:#fff;color:var(--text);transition:background .2s}
+    .btn:hover{background:var(--hover)}
+    .btn.primary{background:var(--pink);color:#fff;border-color:var(--pink)}
+    .btn.primary[disabled]{opacity:.45;cursor:not-allowed}
+
+    /* Footer */
+    .footer-section{padding:0;display:flex;justify-content:center}
+    .footer-container{width:100%;padding:16px;display:flex;flex-direction:column;justify-content:center;gap:8px;align-items:center;border-top:1px solid var(--border);background:#fff}
+    .footer-links{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px}
+    .footer-link{font-size:12px;font-weight:400;color:var(--muted);text-decoration:none}
+    .footer-separator{margin:0 5px;color:#d3d3d3}
+
+    /* Hidden skip message (instant redirect) */
+    .skip-note{display:none;text-align:center;color:#6D6E71;font-size:14px;padding:16px}
+    .skip-note.show{display:block;}
+  </style>
+</head>
+<body>
+  <div id="__next">
+    <!-- Header -->
+    <section class="header-section" aria-label="Header">
+      <div class="header-container">
+        <img class="logo" src="https://static.wixstatic.com/media/c70145_6f9d2c9d30da4051a7678b3d1ee8e175~mv2.png/v1/fill/w_176,h_182,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c70145_948fe39b8daf48799a907c089cac9b9a~.png" alt="App logo" />
+      </div>
+      <hr class="separator" />
+    </section>
+
+    <!-- Main -->
+    <section class="main-content-section" aria-labelledby="energy-title">
+      <div class="content-wrapper">
+        <div class="title-container">
+          <h1 id="energy-title" class="title-text">How’s your energy been since <span id="problem-text">these symptoms</span> began?</h1>
+        </div>
+        <p class="subtitle">(Shown because you selected “Low energy” earlier.)</p>
+
+        <div class="options-list" id="options" role="radiogroup" aria-label="Energy since it began">
+          <button class="option" type="button" data-value="energy_constant_low" aria-pressed="false" role="radio" aria-checked="false">
+            I wake up tired and go to bed tired, my energy is constantly low
+          </button>
+          <button class="option" type="button" data-value="energy_some_fatigue" aria-pressed="false" role="radio" aria-checked="false">
+            I notice more fatigue but still manage
+          </button>
+          <button class="option" type="button" data-value="energy_steady" aria-pressed="false" role="radio" aria-checked="false">
+            I feel energized and steady most of the time
+          </button>
+        </div>
+
+        <div class="skip-note" id="skipNote">Skipping this step…</div>
+
+        <div class="nav" role="navigation">
+          <a id="backBtn" href="#" class="btn" aria-label="Back to previous step">Back</a>
+          <button id="nextBtn" class="btn primary" disabled aria-disabled="true" aria-label="Continue to next step">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer-section">
+      <footer class="footer-container" aria-label="Footer">
+        <div class="footer-links">
+          <a class="footer-link" href="#">Terms</a>
+          <span class="footer-separator">•</span>
+          <a class="footer-link" href="#">Privacy</a>
+          <span class="footer-separator">•</span>
+          <a class="footer-link" href="#">Support</a>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+  <script>
+    (function(){
+      // Keys
+      const KEY='menopause-quiz';
+      const SID_KEY='quiz_session_id';
+
+      // Helpers
+      function get(){ try{return JSON.parse(localStorage.getItem(KEY))||{};}catch{return{};} }
+      function setAll(o){ localStorage.setItem(KEY, JSON.stringify(o)); }
+      function setAns(k,v){ const d=get(); d[k]=v; setAll(d); }
+      function params(){ return new URLSearchParams(location.search); }
+
+      // Stage -> phrase for "{Problem}"
+      function stagePhrase(s){
+        if(!s) return 'these symptoms';
+        const x=String(s).toLowerCase();
+        if (x.includes('peri')) return 'perimenopause';
+        if (x.includes('post')) return 'postmenopause';
+        if (x.includes('pre'))  return 'pre-menopause';
+        if (x.includes('menopause')) return 'menopause';
+        return 'these symptoms';
+      }
+
+      // Ensure sid param
+      const qs=params();
+      let sid=localStorage.getItem(SID_KEY);
+      if(!sid){
+        sid=(crypto.randomUUID?crypto.randomUUID():([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)));
+        localStorage.setItem(SID_KEY,sid);
+      }
+      if(!qs.get('sid')) qs.set('sid', sid);
+
+      // Set {Problem} text
+      const answers=get();
+      const stage = qs.get('stage') || answers.stage || '';
+      document.getElementById('problem-text').textContent = stagePhrase(stage);
+
+      // Should we show? (requires "Low energy" in symptoms)
+      let chosen = [];
+      if (Array.isArray(answers.symptoms)) chosen = answers.symptoms.slice();
+      else if (typeof answers.symptoms === 'string') chosen = answers.symptoms.split(',').map(s=>s.trim());
+      const urlSymptoms = qs.getAll('symptoms');
+      if (urlSymptoms.length) chosen = chosen.concat(urlSymptoms);
+      const hasLowEnergy = chosen.some(s => (s||'').toString().toLowerCase().includes('low energy'));
+
+      const NEXT='step_24.html';
+      const skipNote=document.getElementById('skipNote');
+
+      if(!hasLowEnergy){
+        // No need to ask—skip forward
+        skipNote.classList.add('show');
+        setTimeout(()=>{ location.href = `${NEXT}?${qs.toString()}`; }, 10);
+        return;
+      }
+
+      // Wire UI
+      const list=document.getElementById('options');
+      const nextBtn=document.getElementById('nextBtn');
+      const backBtn=document.getElementById('backBtn');
+
+      function update(){
+        const sel=list.querySelector('.option[aria-pressed="true"]');
+        const on=!!sel;
+        nextBtn.disabled=!on;
+        nextBtn.setAttribute('aria-disabled', String(!on));
+      }
+
+      list.addEventListener('click', e=>{
+        const btn=e.target.closest('.option'); if(!btn) return;
+        list.querySelectorAll('.option').forEach(b=>{b.setAttribute('aria-pressed','false'); b.setAttribute('aria-checked','false');});
+        btn.setAttribute('aria-pressed','true'); btn.setAttribute('aria-checked','true');
+        update();
+      });
+
+      // Keyboard support
+      list.querySelectorAll('.option').forEach(b=>{
+        b.addEventListener('keydown',e=>{
+          if(e.key==='Enter'||e.key===' '){ e.preventDefault(); b.click(); }
+        });
+      });
+
+      // Back/Next
+      backBtn.addEventListener('click', e=>{
+        e.preventDefault();
+        const prev='step_22.html';
+        location.href = `${prev}?${qs.toString()}`;
+      });
+
+      nextBtn.addEventListener('click', ()=>{
+        const sel=list.querySelector('.option[aria-pressed="true"]'); if(!sel) return;
+        const val=sel.dataset.value;
+        setAns('energy_since_stage', val);
+        qs.set('energy_since_stage', val);
+        location.href = `${NEXT}?${qs.toString()}`;
+      });
+    })();
+  </script>
+</body>
+</html>
