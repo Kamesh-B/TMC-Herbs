@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step • Thanks for sharing</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink:#e75480;          /* primary */
+      --pink-2:#ff8fb0;        /* gradient stop */
+      --pink-light:#ffe6ec;    /* light bg */
+      --border:#EDEDF2;
+      --text:#212124;
+      --muted:#6D6E71;
+    }
+
+    html { line-height: 1.15; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif; background: #ffffff; color: var(--text); }
+    *,:after,:before { box-sizing: border-box; border: 0 solid var(--border); }
+    html,body { height: 100%; }
+
+    #__next { display: flex; flex-direction: column; margin: 0 auto; max-width: 430px; width: 100%; min-height: 100%; background: #ffffff; position: relative; }
+
+    /* Main */
+    .main { flex: 1 1 auto; display: flex; justify-content: center; align-items: center; padding: 32px 20px; }
+    .card { max-width: 430px; text-align: center; }
+
+    /* Circular loader */
+    .circle-wrap { width: 140px; height: 140px; margin: 0 auto 18px; position: relative; }
+    .circle { transform: rotate(-90deg); width: 140px; height: 140px; }
+    .track { stroke: #f2f3f7; }
+    .progress { stroke: url(#g); stroke-linecap: round; filter: drop-shadow(0 2px 6px rgba(231,84,128,.25)); }
+    .percent { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 800; font-size: 20px; color: var(--pink); }
+
+    @keyframes progressAnim { from { stroke-dashoffset: var(--circumference); } to { stroke-dashoffset: 0; } }
+
+    /* Text */
+    .title-lg { font-size: 28px; font-weight: 800; line-height: 1.2; margin: 8px 0 12px; }
+    .lead { font-size: 14px; line-height: 1.6; margin: 0 auto 20px; color: var(--text); max-width: 42ch; }
+    .muted { font-size: 12px; color: var(--muted); line-height: 1.55; margin-top: 10px; }
+
+    /* CTA row */
+    .actions { display:flex; justify-content:center; gap:12px; margin-top:18px; }
+    .btn { border:1px solid var(--border); background:#fff; color: var(--text); padding:12px 14px; border-radius:12px; font-weight:700; }
+    .btn.primary { background: var(--pink); border-color: var(--pink); color:#fff; }
+
+    /* Footer */
+    .footer { padding: 14px; border-top: 1px solid var(--border); text-align: center; font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+
+<body>
+  <div id="__next">
+    <main class="main" aria-live="polite">
+      <div class="card">
+        <!-- Circular progress -->
+        <div class="circle-wrap" aria-label="Loading">
+          <svg class="circle" viewBox="0 0 140 140" width="140" height="140" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="var(--pink)"/>
+                <stop offset="100%" stop-color="var(--pink-2)"/>
+              </linearGradient>
+            </defs>
+            <circle class="track" cx="70" cy="70" r="54" fill="none" stroke-width="12"/>
+            <circle id="progressCircle" class="progress" cx="70" cy="70" r="54" fill="none" stroke-width="12"
+                    stroke-dasharray="0" stroke-dashoffset="0" />
+          </svg>
+          <div id="percent" class="percent">0%</div>
+        </div>
+
+        <h1 class="title-lg">🩺 Thanks for sharing!</h1>
+        <p class="lead">
+          Your answers help us match a suitable herbal formula <b>safely and effectively</b>. Plus, it helps us
+          personalize every suggestion around <b>you</b>.
+        </p>
+        <p class="muted">Up next, we’ll continue tailoring your plan based on your unique patterns.</p>
+
+        <div class="actions">
+          <button id="skipBtn" class="btn" type="button" aria-label="Skip waiting">Skip</button>
+          <button id="continueBtn" class="btn primary" type="button" aria-label="Continue now">Continue now</button>
+        </div>
+      </div>
+    </main>
+
+    <div class="footer">Auto-advancing shortly…</div>
+  </div>
+
+  <script>
+    (function(){
+      const DURATION = 5000;           // ms
+      const NEXT_PAGE = 'step_35.html'; // 👈 set this to your next step
+
+      // Preserve params & sid
+      const params = new URLSearchParams(location.search);
+      const SID_KEY = 'quiz_session_id';
+      let sid = localStorage.getItem(SID_KEY);
+      if (!sid) {
+        sid = (crypto.randomUUID
+          ? crypto.randomUUID()
+          : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+              (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            ));
+        localStorage.setItem(SID_KEY, sid);
+      }
+      if (!params.get('sid')) params.set('sid', sid);
+
+      // Circular progress animation
+      const circle = document.getElementById('progressCircle');
+      const percentEl = document.getElementById('percent');
+      const r = 54;
+      const C = 2 * Math.PI * r;
+      circle.style.setProperty('--circumference', C);
+      circle.setAttribute('stroke-dasharray', String(C));
+      circle.setAttribute('stroke-dashoffset', String(C));
+      circle.style.animation = `progressAnim ${DURATION}ms linear forwards`;
+
+      // Count-up text
+      const t0 = performance.now();
+      function tick(now){
+        const elapsed = now - t0;
+        const p = Math.min(1, elapsed / DURATION);
+        percentEl.textContent = Math.round(p * 100) + '%';
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      const goNext = () => { location.href = `${NEXT_PAGE}?${params.toString()}`; };
+      const timer = setTimeout(goNext, DURATION);
+
+      document.getElementById('skipBtn').addEventListener('click', () => { clearTimeout(timer); goNext(); });
+      document.getElementById('continueBtn').addEventListener('click', () => { clearTimeout(timer); goNext(); });
+
+      // Reduced motion support
+      const media = matchMedia('(prefers-reduced-motion: reduce)');
+      if (media.matches) {
+        circle.style.animationDuration = '1ms';
+        percentEl.textContent = '100%';
+        clearTimeout(timer);
+        setTimeout(goNext, 250);
+      }
+
+      // Optional analytics
+      // navigator.sendBeacon && navigator.sendBeacon('/.netlify/functions/save-click',
+      //   new Blob([JSON.stringify({ sessionId: sid, event: 'thanks_view', page: location.pathname + location.search, ts: new Date().toISOString() })],
+      //   {type:'application/json'}));
+    })();
+  </script>
+</body>
+</html>
