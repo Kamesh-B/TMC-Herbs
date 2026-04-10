@@ -1,252 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flo: Fertility, Cycle, and Ovulation. Female Health App.</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* --- Base Setup & Resets --- */
-        html {
-            line-height: 1.15;
-            -webkit-text-size-adjust: 100%;
-        }
-        body {
-            margin: 0;
-            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #fdfdfd;
-        }
-        *,:after,:before {
-            box-sizing: border-box;
-            border: 0 solid #e5e7eb;
-        }
-        html,body {
-            height: 100%;
-        }
-        div, span, p, h1, h2, h3, ul, li, footer, section, button, a, img {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            font: inherit;
-            vertical-align: baseline;
-        }
-        ul {
-            list-style: none;
-        }
-        button, a {
-            background: none;
-            cursor: pointer;
-            text-decoration: none; /* This is the key change to make links look like buttons */
-        }
-
-        /* --- Main Layout --- */
-        #__next {
-            display: flex;
-            flex-direction: column;
-            margin: 0 auto;
-            max-width: 430px;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            position: relative;
-        }
-        .main-content-section {
-            flex: 1 1 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 48px 24px;
-        }
-        .content-wrapper {
-            width: 100%;
-            max-width: 430px;
-        }
-        
-        /* --- Header --- */
-        .header-section {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background-color: #FFFFFF;
-            padding-top: 16px;
-        }
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 24px;
-        }
-        .logo {
-            width: 80px;
-        }
-        .separator {
-            border: none;
-            border-top: 1px solid #EDEDF2;
-            margin: 0;
-        }
-        
-        /* --- Title --- */
-        .title-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 24px;
-        }
-        .title-text {
-            color: #212124;
-            font-size: 28px;
-            font-weight: 700;
-            line-height: 1.1;
-            text-align: center;
-            font-family: 'Manrope', sans-serif;
-        }
-        
-        /* --- Age Group Buttons --- */
-        .button-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-        .age-button {
-            background-color: #FFFFFF;
-            border: 1px solid #EDEDF2;
-            border-radius: 16px;
-            padding: 8px;
-            transition: background 0.2s, border 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .age-button:hover {
-            background-color: #F8F8F8;
-            border-color: #DADBE3;
-        }
-        .age-button-image {
-            max-width: 100%;
-            padding: 12px;
-            height: auto;
-        }
-        .age-button-text-wrapper {
-            background-color: #F7F8FA;
-            width: 100%;
-            padding: 12px 0;
-            border-radius: 10px;
-            margin-top: 8px;
-        }
-        .age-button-text {
-            color: #000;
-            font-weight: 600;
-            font-size: 18px;
-            text-align: center;
-            letter-spacing: -0.025em;
-        }
-        
-        /* --- "Under 18" Button --- */
-        .under-18-button {
-            display: block; /* Important for anchor tag layout */
-            grid-column: 1 / -1;
-            border: 1px solid #EDEDF2;
-            border-radius: 16px;
-            padding: 18px;
-            transition: background 0.2s;
-            margin-top: 16px;
-        }
-        .under-18-button:hover {
-            background-color: #F8F8F8;
-        }
-        .under-18-text {
-            color: #212124;
-            font-weight: 600;
-            font-size: 18px;
-            text-align: center;
-        }
-        
-        /* --- Footer --- */
-        .footer-section {
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-        .footer-container {
-            width: 100%;
-            padding: 20px 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 10px;
-            align-items: center;
-            border-top: 1px solid #EDEDF2;
-            background-color: #ffffff;
-        }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-        .footer-link {
-            font-size: 12px;
-            font-weight: 400;
-            color: #6D6E71;
-            text-decoration: none;
-        }
-        .footer-separator {
-            margin: 0 5px;
-            color: #d3d3d3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storm Outage Prediction Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div id="__next">
-        <section class="header-section">
-            <div class="header-container">
-                <img class="logo" src="https://static.wixstatic.com/media/c70145_6f9d2c9d30da4051a7678b3d1ee8e175~mv2.png/v1/fill/w_176,h_182,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c70145_948fe39b8daf48799a907c089cac9b9a~.png" alt="Flo - Female Health App">
-            </div>
-            <hr class="separator">
-        </section>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="title-block">
+        <p class="eyebrow">Forecast as-of time</p>
+        <h1>Storm Outage Prediction</h1>
+        <p>Memphis electric utility operations</p>
+      </div>
+      <div class="asof-card">
+        <span>Forecast as of</span>
+        <strong id="forecastAsOf">Loading forecast time</strong>
+        <small>Peak between 8:10 PM and 11:30 PM CT</small>
+      </div>
+    </header>
 
-        <section class="main-content-section">
-            <div class="content-wrapper">
-                <div class="title-container">
-                    <span class="title-text">What’s your age group?</span>
-                </div>
-                <div class="button-grid">
-                    <a href="Survey/step_0.html" class="age-button">
-                        <img class="age-button-image" src="https://content.owhealth.com/release_v2/media/en-US/4nkXQwwvJ28HbwWByvSyRy.svg" alt="">
-                        <div class="age-button-text-wrapper">
-                             <span class="age-button-text">18-25</span>
-                        </div>
-                    </a>
-                    <a href="Survey/step_0.html" class="age-button">
-                        <img class="age-button-image" src="https://content.owhealth.com/release_v2/media/en-US/2HjmA3XBn6LgoAafbmbxE.svg" alt="">
-                         <div class="age-button-text-wrapper">
-                            <span class="age-button-text">26-35</span>
-                        </div>
-                    </a>
-                    <a href="Survey/step_0.html" class="age-button">
-                        <img class="age-button-image" src="https://content.owhealth.com/release_v2/media/en-US/3t1EJYZRzcf9XbcxXP7MDi.svg" alt="">
-                        <div class="age-button-text-wrapper">
-                            <span class="age-button-text">36-44</span>
-                        </div>
-                    </a>
-                    <a href="Survey/step_0.html" class="age-button">
-                        <img class="age-button-image" src="https://content.owhealth.com/release_v2/media/en-US/1NjKez7ow2hjDCfDic5XJ5.svg" alt="">
-                        <div class="age-button-text-wrapper">
-                            <span class="age-button-text">45+</span>
-                        </div>
-                    </a>
-                </div>
-                <a href="Survey/step_0.html" class="under-18-button">
-                    <p class="under-18-text">Under 18</p>
-                </a>
-            </div>
-        </section>
+    <section class="kpi-grid" id="kpiGrid" aria-label="Storm outage metrics"></section>
+    
+    <section class="panel weekly-forecast-panel" aria-labelledby="weeklyForecastTitle">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Weekly forecast</p>
+          <h2 id="weeklyForecastTitle">Click a day to change the radar and outage count</h2>
+        </div>
+        <p class="weekly-forecast-note">Each daily card updates the radar outlook, outage totals, and operational stress view for Shelby County.</p>
+      </div>
 
-        <section class="footer-section">
-            <footer class="footer-container">
+      <div class="weekly-forecast-grid" id="weeklyForecast" aria-label="Weekly outage forecast selector"></div>
+    </section>
+
+    <main class="dashboard-layout">
+      <section class="panel map-panel" aria-labelledby="mapTitle">
+        <a class="severe-alert-banner" href="#territoryTitle">
+          <span class="severe-alert-banner__icon">!</span>
+          <span class="severe-alert-banner__type">Severe Thunderstorm Statement</span>
+          <span class="severe-alert-banner__arrow" aria-hidden="true">></span>
+        </a>
+
+        <div class="panel-header radar-header">
+          <div>
+            <p class="eyebrow">Memphis service territory</p>
+            <h2 id="mapTitle">Memphis Weather Radar</h2>
+            <p class="map-subtitle">12-hour Doppler forecast with outage risk overlays and MLGW service territories.</p>
+          </div>
+          <button class="map-info-button" id="radarInfoButton" type="button" aria-expanded="false" aria-controls="radarTooltipCard">i</button>
+        </div>
+
+        <div class="map-tooltip-card" id="radarTooltipCard" hidden>
+          Weather radar shows forecast precipitation intensity and its movement across Shelby County to support crew staging, outage probability, and restoration timing.
+        </div>
+
+        <div class="map-actions" aria-label="Map layers">
+          <button class="layer-toggle active" type="button" data-layer="territories" aria-pressed="true">Service Territories</button>
+          <button class="layer-toggle active" type="button" data-layer="radar" aria-pressed="true">12 hr Doppler</button>
+          <button class="layer-toggle active" type="button" data-layer="circuits" aria-pressed="true">Circuit heat</button>
+          <button class="layer-toggle active" type="button" data-layer="facilities" aria-pressed="true">Facilities</button>
+          <button class="layer-toggle active" type="button" data-layer="crews" aria-pressed="true">Crews</button>
+        </div>
+
+        <div class="map-wrap">
+          <div id="memphisMap" class="memphis-map" role="application" aria-label="Clickable Memphis outage prediction map"></div>
+          <div class="radar-clock" id="radarClock">12 hr Doppler forecast loading</div>
+          <div class="map-fallback" id="mapFallback" hidden>
+            <strong>Map tiles are unavailable.</strong>
+            <span>The territory and outage data below is still ready for dispatch planning.</span>
+          </div>
+          <div class="map-legend" aria-label="Map legend">
+            <span><i class="legend-swatch service"></i> Service Territories</span>
+            <span><i class="legend-swatch risk"></i> Darker means higher risk</span>
+            <span><i class="legend-swatch radar"></i> 12 hr Doppler</span>
+            <span><i class="legend-swatch heat"></i> Circuit heat</span>
+            <span><i class="legend-swatch facility"></i> Critical facility</span>
+          </div>
+        </div>
+
+        <div class="play-bar" id="radarPlayBar">
+          <button class="play-bar-toggle" id="playBarToggle" type="button" aria-label="Pause radar playback">
+            <span class="play-bar-icon" id="playBarIcon"></span>
+          </button>
+          <div class="play-bar-current-time">
+            <div class="time" id="playCurrentTime">Now</div>
+            <div class="day-name" id="playCurrentDay">Forecast</div>
+          </div>
+          <div class="play-bar-scrubber" id="radarScrubber" aria-label="Radar timeline">
+            <div class="play-bar-now-text" id="playNowText">Now</div>
+            <div class="play-bar-progress" id="playBarProgress"></div>
+            <div class="play-bar-track" id="playBarTrack"></div>
+            <div class="play-bar-thumb" id="playBarThumb" aria-hidden="true"></div>
+          </div>
+          <div class="play-bar-end-time">
+            <div class="time" id="playEndTime">+12 hr</div>
+            <div class="day-name">Forecast End</div>
+          </div>
+        </div>
+
+        <div class="map-tools">
+          <div class="radar-legend">
+            <div class="legend-item">
+              <div class="label">Rain</div>
+              <div class="legend-block c-1"></div>
+              <div class="legend-block c-2"></div>
+              <div class="legend-block c-3"></div>
+              <div class="legend-block c-4"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel territory-panel" aria-labelledby="territoryTitle">
+        <div class="panel-header compact">
+          <div>
+            <p class="eyebrow">MLGW service territories</p>
+            <h2 id="territoryTitle">Select a service center</h2>
+          </div>
+          <span class="risk-pill" id="territoryRisk">Risk</span>
+        </div>
+
+        <div class="territory-list" id="territoryList" aria-label="Service territory selector"></div>
+        <div class="detail-stack" id="territoryDetails"></div>
+      </aside>
+    </main>
+
+    <section class="analysis-grid" aria-label="Outage forecast details">
+      <article class="panel">
+        <div class="panel-header compact">
+          <div>
+            <p class="eyebrow">Storm severity window</p>
+            <h2>Next 6, 12, and 24 hours</h2>
+          </div>
+        </div>
+        <div class="severity-grid" id="severityGrid"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header compact">
+          <div>
+            <p class="eyebrow">Territory probability</p>
+            <h2>Predicted outage probability</h2>
+          </div>
+        </div>
+        <div class="row-stack" id="probabilityRows"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header compact">
+          <div>
+            <p class="eyebrow">Crew demand</p>
+            <h2>Required vs available crews</h2>
+          </div>
+        </div>
+        <div class="row-stack" id="crewRows"></div>
+      </article>
+
+      <article class="panel panel-wide">
+        <div class="panel-header compact">
+          <div>
+            <p class="eyebrow">Circuits at high risk</p>
+            <h2>Heat-ranked feeder watch list</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Circuit</th>
+                <th>Territory</th>
+                <th>Probability</th>
+                <th>Predicted customers interrupted</th>
+                <th>Primary driver</th>
+                <th>ETR range</th>
+              </tr>
+            </thead>
+            <tbody id="circuitRows"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header compact">
+          <div>
+            <p class="eyebrow">Critical facilities at risk</p>
+            <h2>Hospitals, water, telecom, shelters</h2>
+          </div>
+        </div>
+        <div class="row-stack" id="facilityRows"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header compact">
+          <div>
+            <p class="eyebrow">Predicted restoration time</p>
+            <h2>ETR range by territory</h2>
+          </div>
+        </div>
+        <div class="row-stack" id="etrRows"></div>
+      </article>
+    </section>
+  </div>
+
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="script.js"></script>
+</body>
+</html>
